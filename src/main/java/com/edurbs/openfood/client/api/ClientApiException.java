@@ -3,9 +3,7 @@ package com.edurbs.openfood.client.api;
 import org.springframework.web.client.RestClientResponseException;
 
 import com.edurbs.openfood.client.model.Problem;
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.DeserializationFeature;
-import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 
@@ -26,6 +24,7 @@ public class ClientApiException extends RuntimeException {
 
     private void deserializeProblem(RestClientResponseException cause){
         ObjectMapper mapper = new ObjectMapper();
+
         mapper.registerModule(new JavaTimeModule());
         mapper.findAndRegisterModules();
         mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
